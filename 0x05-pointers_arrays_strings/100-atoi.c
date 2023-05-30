@@ -1,61 +1,49 @@
-#include <stdio.h>
-
+#include "main.h"
+/**
+ * _atoi - converts a string to an integer
+ * @s : input string to convert
+ *
+ * Return: integer conversion of the string
+ */
 int _atoi(char *s)
 {
-	int slen = 0;
-	int digitCount = 0;
-	int finalNum = 0;
-	int i, firstNum, m, num;
+	unsigned int i = 0;
+	unsigned int value = 0;
 	int sign = 1;
+	unsigned int digit = 0;
+	unsigned int next = 1;
 
-	while (s[slen] != '\0')
+	while (s[i] != '\0')
 	{
-		slen++;
-	}
+		next = i + 1;
 
-	for (i = 0; i < slen; i++)
-	{
-		if (s[i] >= 48 && s[i] <= 57)
+		if (s[i] == '-')
 		{
-			firstNum = i;
-			break;
+			sign = sign * -1;
+			i++;
 		}
-
-		 if (s[i] == '-' && sign == 1)
-        {
-            sign = 0;
-        } else if(s[i] == '-' && sign == 0)
-        {
-            sign = 1;
-        } else {
-            sign = 1;
-        }
-	}
-
-	for (i = firstNum; i < slen; i++)
-	{
-		if (s[i] < 48 || s[i] > 57)
+		else if (s[i] == '+')
 		{
-			break;
+			sign = sign * 1;
+			i++;
 		}
-		digitCount++;
-	}
-
-	for (i = firstNum + digitCount - 1; i >= firstNum; i--)
-	{
-		num = s[i] - 48;
-		for (m = firstNum + digitCount - 1; m > i; m--)
+		else if (s[i] <= '9' && s[i] >= '0')
 		{
-			num = num *10;
+			digit = s[i] - '0';
+			value = (value * 10) + digit;
+			if (s[next] <= '9' && s[next] >= '0')
+			{
+				i++;
+			}
+			else
+			{
+				break;
+			}
 		}
-		finalNum = finalNum + num;
-		
+		else
+		{
+			i++;
+		}
 	}
-
-	if (!sign )
-	{
-		return finalNum * -1;
-	}
-
-	return finalNum;
+		return (value * sign);
 }

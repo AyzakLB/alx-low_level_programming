@@ -1,6 +1,0 @@
-#include <stdio.h>
-
-void funk(void)
-{
-	printf("hello all");
-}
