@@ -1,0 +1,4 @@
+int testu(void)
+{
+	return 123;
+}
